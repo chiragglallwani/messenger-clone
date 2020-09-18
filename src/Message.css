@@ -12,8 +12,11 @@
 
 .message__userCard{
     background-color: #0B81ff !important;
+    border-radius: 25px;
 }
 
 .message__guestCard{
     background-color: #e9e9eb !important;
+    border-radius: 25px;
 }
+

@@ -5,6 +5,9 @@ import Message from './Message';
 import db from './firebase';
 import firebase from 'firebase';
 import FlipMove from 'react-flip-move';
+import SendIcon from '@material-ui/icons/Send';
+import { IconButton } from '@material-ui/core';
+
 
 function App() {
   const [input, setInput] = useState('');
@@ -35,27 +38,28 @@ function App() {
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     setMessages(
-      [...messages, {username: username, text: input}]
+      [...messages, {username: username, message: input}]
       );
     setInput('');
   }
   return (
 
     <div className="App">
-      <img />
-      <h1>Messenger-clone</h1>
+      <img src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100"/>
+      <h1>Facebook-Messenger-Clone</h1>
       <h2>Welcome to chat: {username}</h2>
-      <form>
-        <FormControl>
-          <InputLabel >Enter text here....</InputLabel>
-          <Input  value={input} onChange={event => setInput(event.target.value)}/>
-          <Button disabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}>Send Message</Button>
+      <form className="form__app">
+        <FormControl className="app__formControl">
+          <Input className="app__input" placeholder="Enter a message" value={input} onChange={event => setInput(event.target.value)}/>
+          <IconButton className="app__iconButton" disabled={!input} variant="contained" color="primary" type='submit' onClick={sendMessage}>
+            <SendIcon />
+          </IconButton>
         </FormControl>
       </form>
 
      <FlipMove>
         {
-        messages.map(({id, message}) =>(
+        messages.map(({id, message}) =>( //here message variable should be similar to the variable we are appending at line: 38 "message: input
         <Message key={id} username={username} message={message} />
         ))
         }
